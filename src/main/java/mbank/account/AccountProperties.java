@@ -7,10 +7,10 @@ import org.springframework.stereotype.Component;
 public class AccountProperties {
 
     final int defaultAmount;
-    final float transferCommission;
+    final double transferCommission;
 
     public AccountProperties(@Value("${account.default-amount}") int defaultAmount,
-                             @Value("${account.transfer-commission}") float transferCommission) {
+                             @Value("${account.transfer-commission}") double transferCommission) {
         String errorMessage = "";
         boolean isIncorrectParameters = false;
         if (defaultAmount < 0){
@@ -34,7 +34,7 @@ public class AccountProperties {
         return defaultAmount;
     }
 
-    public float getTransferCommission() {
+    public double getTransferCommission() {
         return transferCommission;
     }
 

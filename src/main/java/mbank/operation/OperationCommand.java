@@ -1,4 +1,6 @@
 package mbank.operation;
 
-public class OperationCommand {
+public interface OperationCommand {
+    void execute();
+    ConsoleOperationType getOperationType();
 }

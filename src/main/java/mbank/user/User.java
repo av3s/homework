@@ -13,14 +13,11 @@ public class User {
     public User(int id, String login) {
         this.id = id;
         this.login = login;
+        this.accountList = new ArrayList<>();
     }
 
     public int getId() {
         return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
     }
 
     public String getLogin() {
@@ -35,11 +32,14 @@ public class User {
 
        return new ArrayList<>(accountList);
     }
-
-    public void addAccount(Account account) {
-        if(account!=null){
-            this.accountList.add(account);
-        }
-
+    public boolean isFirstAccount(){
+        return accountList.isEmpty();
     }
+
+//    public void addAccount(Account account) {
+//        if(account!=null){
+//            this.accountList.add(account);
+//        }
+//
+//    }
 }
