@@ -8,7 +8,7 @@ import org.springframework.stereotype.Component;
 public class CreateUserCommand implements OperationCommand {
     @Override
     public void execute() {
-        System.out.println("jOK");
+        System.out.println("CreateUserCommand");
     }
 
     @Override
