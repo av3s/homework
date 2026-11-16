@@ -9,10 +9,33 @@ public class AccountProperties {
     final int defaultAmount;
     final float transferCommission;
 
-    public AccountProperties(@Value("${account.default-amount:0}") int defaultAmount,
-                             @Value("${account.transfer-commission:0.0}") float transferCommission) {
+    public AccountProperties(@Value("${account.default-amount}") int defaultAmount,
+                             @Value("${account.transfer-commission}") float transferCommission) {
+        String errorMessage = "";
+        boolean isIncorrectParameters = false;
+        if (defaultAmount < 0){
+            errorMessage = "\nПараметр default-amount должен быть >= 0";
+            isIncorrectParameters = !isIncorrectParameters;
+          }
+       if(transferCommission < 0){
+           errorMessage = errorMessage + "\nПараметр transfer-commission должен быть >= 0";
+           if(!isIncorrectParameters) {
+               isIncorrectParameters = !isIncorrectParameters;
+           }
+       }
+       if(isIncorrectParameters){
+           throw new IllegalArgumentException(errorMessage);
+       }
         this.defaultAmount = defaultAmount;
         this.transferCommission = transferCommission;
+    }
+
+    public int getDefaultAmount() {
+        return defaultAmount;
+    }
+
+    public float getTransferCommission() {
+        return transferCommission;
     }
 
     @Override
