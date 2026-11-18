@@ -10,7 +10,13 @@ public class ConsoleInput {
 
     public String reedString(String prompt){
         System.out.print(prompt);
-        return scanner.nextLine().trim();  //TODO: починить CTRL+D
+        if(!scanner.hasNextLine()){
+            System.out.println("Ввод завершён.");
+            return "EXIT";// TODO: убрать смешение семантик
+        }
+
+
+        return scanner.nextLine().trim();
     }
 
 

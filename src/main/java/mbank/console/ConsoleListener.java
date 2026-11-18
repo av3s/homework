@@ -43,7 +43,11 @@ public class ConsoleListener {
                 System.out.println("Error: Wrong command: " + currentLine);
             }
             ConsoleOperationType command = commandOpt.orElse(ConsoleOperationType.HELP);
-            commandMap.get(command).execute();
+                commandMap.get(command).execute();
+            if(command == ConsoleOperationType.EXIT){
+                isRunning = false;
+
+            }
 
         } while (isRunning);
     }

@@ -8,7 +8,7 @@ import org.springframework.stereotype.Component;
 public class ExitCommand implements OperationCommand {
     @Override
     public void execute() {
-        System.out.println("exit");
+        System.out.println("До свидания.");
     }
 
     @Override
