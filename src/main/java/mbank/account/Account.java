@@ -1,5 +1,7 @@
 package mbank.account;
 
+import java.text.MessageFormat;
+
 public class Account {
     int id;
     int userId;
@@ -30,5 +32,9 @@ public class Account {
 
     public void setMoneyAmmount(double moneyAmmount) {
         this.moneyAmmount = moneyAmmount;
+    }
+    @Override
+    public String toString(){
+        return MessageFormat.format("Account'{'id={0}, userId={1}, moneyAmount={2}'}'", id, userId, moneyAmmount );
     }
 }

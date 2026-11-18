@@ -6,7 +6,6 @@ import mbank.operation.OperationCommand;
 import org.springframework.stereotype.Component;
 
 import java.util.*;
-import java.util.function.Function;
 import java.util.stream.Collectors;
 
 @Component
@@ -43,7 +42,7 @@ public class ConsoleListener {
             String currentLine;
             try {
                 do {
-                    currentLine = consoleInput.reedString("Enter command > ");
+                    currentLine = consoleInput.readString("Enter command > ");
                 } while (currentLine.isEmpty());
 
             } catch (UnexpectedEndOfInputException exception) {

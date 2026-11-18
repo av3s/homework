@@ -5,6 +5,6 @@ public class UnexpectedEndOfInputException extends RuntimeException {
     super(message);
   }
   public UnexpectedEndOfInputException() {
-    super("Ввод завершён.");
+    super("Ввод завершён. ");
   }
 }

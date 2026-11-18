@@ -1,6 +1,7 @@
 package mbank.console;
 
 import exceptions.UnexpectedEndOfInputException;
+import exceptions.ValidationException;
 import org.springframework.stereotype.Component;
 
 import java.util.Scanner;
@@ -9,15 +10,20 @@ import java.util.Scanner;
 public class ConsoleInput {
     private final Scanner scanner = new Scanner(System.in);
 
-    public String reedString(String prompt){
+    public String readString(String prompt) {
         System.out.print(prompt);
-        if(!scanner.hasNextLine()){
-            throw new UnexpectedEndOfInputException();
+        for (; ; ) {
+            if (!scanner.hasNextLine()) {
+                throw new UnexpectedEndOfInputException();
+            }
+            String currentLine = scanner.nextLine().trim();
+            if (!currentLine.isEmpty()) return currentLine;
         }
-
-
-        return scanner.nextLine().trim();
     }
 
 
+
+    public int readInt(String prompt){
+        return Integer.parseInt(readString(prompt));
+    }
 }

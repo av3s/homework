@@ -1,5 +1,6 @@
 package mbank.account;
 
+import exceptions.ValidationException;
 import mbank.user.User;
 import mbank.user.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,22 +25,24 @@ public class AccountService {
         idCounter = -1;
     }
 
-    public int createAccount(int userId) {
+    public Account createAccount(int userId) {
 
         Optional<User> result = userService.findUserById(userId);
         if (result.isPresent()) {
             User user = result.get();
-            int newAccountAmount = 0;
+            double amount = 0;
 
             if (user.isFirstAccount()) {
-                newAccountAmount = accountProperties.defaultAmount;
+                amount = accountProperties.defaultAmount;
             }
             idCounter++;
-            accountMap.put(idCounter, new Account(idCounter, userId, newAccountAmount));
-            userService.addAccountbyUserId(idCounter);
-            return idCounter;
+            Account account = new Account(idCounter, userId, amount ) ;
+            accountMap.put(idCounter, account);
+            userService.addAccountByUserId(userId, account);
+            return account;
         } else {
-            throw new RuntimeException("пользователь не найден");
+
+            throw new ValidationException("\tпользователь не найден!");
         }
 
     }
