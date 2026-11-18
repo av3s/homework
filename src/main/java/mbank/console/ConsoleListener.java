@@ -1,5 +1,6 @@
 package mbank.console;
 
+import exceptions.UnexpectedEndOfInputException;
 import mbank.operation.ConsoleOperationType;
 import mbank.operation.OperationCommand;
 import org.springframework.stereotype.Component;
@@ -35,21 +36,35 @@ public class ConsoleListener {
     public void run() {
         boolean isRunning = true;
         System.out.println("MiniBank running!");
+
+
         commandMap.get(ConsoleOperationType.HELP).execute();
         do {
-            String currentLine = consoleInput.reedString("Enter command > ");
+            String currentLine;
+            try {
+                do {
+                    currentLine = consoleInput.reedString("Enter command > ");
+                } while (currentLine.isEmpty());
+
+            } catch (UnexpectedEndOfInputException exception) {
+                System.out.println(exception.getMessage() + "До свидания!");
+                isRunning = false;
+                continue;
+            }
+
             Optional<ConsoleOperationType> commandOpt = parse(currentLine);
             if (commandOpt.isEmpty()) {
                 System.out.println("Error: Wrong command: " + currentLine);
             }
             ConsoleOperationType command = commandOpt.orElse(ConsoleOperationType.HELP);
-                commandMap.get(command).execute();
-            if(command == ConsoleOperationType.EXIT){
+            commandMap.get(command).execute();
+            if (command == ConsoleOperationType.EXIT) {
                 isRunning = false;
-
             }
 
         } while (isRunning);
+
+
     }
 
     private Optional<ConsoleOperationType> parse(String line) {

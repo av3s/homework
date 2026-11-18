@@ -1,5 +1,6 @@
 package mbank.console;
 
+import exceptions.UnexpectedEndOfInputException;
 import org.springframework.stereotype.Component;
 
 import java.util.Scanner;
@@ -11,8 +12,7 @@ public class ConsoleInput {
     public String reedString(String prompt){
         System.out.print(prompt);
         if(!scanner.hasNextLine()){
-            System.out.println("Ввод завершён.");
-            return "EXIT";// TODO: убрать смешение семантик
+            throw new UnexpectedEndOfInputException();
         }
 
 
