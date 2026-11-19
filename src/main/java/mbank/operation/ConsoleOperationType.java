@@ -5,7 +5,7 @@ public enum ConsoleOperationType {
     SHOW_ALL_USERS,
     ACCOUNT_CREATE,
     ACCOUNT_DEPOSIT,
-    ACCOUNT_WITH_DROW,
+    ACCOUNT_WITHDRAW,
     ACCOUNT_TRANSFER,
     ACCOUNT_CLOSE,
     HELP,
