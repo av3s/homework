@@ -10,9 +10,9 @@ import java.util.NoSuchElementException;
 import java.util.stream.Collectors;
 
 public class User {
-    private int id;
-    private String login;
-    private List<Account> accountList;
+    private final int id;
+    private final String login;
+    private final List<Account> accountList;
 
     public User(int id, String login) {
         this.id = id;
@@ -20,17 +20,12 @@ public class User {
         this.accountList = new ArrayList<>();
     }
 
-
     public int getId() {
         return id;
     }
 
     public String getLogin() {
         return login;
-    }
-
-    public List<Account> getAccountList() {
-        return new ArrayList<>(accountList);
     }
 
     public Account getFirstAccount() {
@@ -68,7 +63,7 @@ public class User {
 
         return MessageFormat.format("User'{'id={0}, login=''{1}'', accounts=[{2}]'}'",
                 id,
-                login.replace("'", "\'"), //спасаем О'Нилов и прочих Д'Артоньянов
+                login,
                 accounts);
     }
 }

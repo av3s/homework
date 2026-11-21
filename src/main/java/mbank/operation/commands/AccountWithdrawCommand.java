@@ -35,7 +35,7 @@ public class AccountWithdrawCommand implements OperationCommand {
             System.out.println(exception.getMessage());
         } catch (
                 NumberFormatException exception) {
-            System.out.println("Неверный формат id аккаунта");
+            System.out.println("Error: неверный формат ввода(ожидается int)");
         }
     }
 

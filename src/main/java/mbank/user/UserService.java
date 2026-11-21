@@ -14,25 +14,26 @@ import java.util.Optional;
 
 @Component
 public class UserService {
-    final private Map<Integer, User> userRepositoryInMemory;
+    private final Map<Integer, User> userRepositoryInMemory;
 
-    final private AccountService accountService;
-    private int idCounter;
+    private final AccountService accountService;
+    private int userIdCounter;
 
     public UserService(@Lazy AccountService accountService) {
         this.userRepositoryInMemory = new HashMap<>();
         this.accountService = accountService;
-        idCounter = -1;
-
+        userIdCounter = -1;
     }
 
     public User createUser(String login) {
 
         if (findUserByLogin(login).isEmpty()) {
-            idCounter++;
-            User user = new User(idCounter, login);
-            userRepositoryInMemory.put(idCounter, user);
-            accountService.createAccount(idCounter);
+
+            userIdCounter++;
+
+                User user = new User(userIdCounter, login);
+                userRepositoryInMemory.put(userIdCounter, user);
+                accountService.createAccount(userIdCounter);
             return user;
         } else {
             throw new ValidationException(MessageFormat.format("\tЛогин \"{0}\" уже занят!", login));
@@ -58,9 +59,9 @@ public class UserService {
                 .orElseThrow(() -> new ValidationException("Пользователь id=" + userId + " не найден. "));
     }
 
-    public boolean isFirstAccount(int userId) {
-        return userRepositoryInMemory.get(userId).getAccountList().isEmpty();
-    }
+  //  public boolean isFirstAccount(int userId) {
+  //      return userRepositoryInMemory.get(userId).getAccountList().isEmpty();
+  //  }
 
 
     public List<User> getUserList() {
@@ -71,12 +72,12 @@ public class UserService {
         userRepositoryInMemory.get(userId).addAccount(account);
     }
 
-    public void addAccount(int userId, Account account) {
-        if (account != null) {
-            userRepositoryInMemory.get(userId).addAccount(account);
-        } else {
-            throw new NullPointerException();
-        }
-
-    }
+//    public void addAccount(int userId, Account account) {
+//        if (account != null) {
+//            userRepositoryInMemory.get(userId).addAccount(account);
+//        } else {
+//            throw new NullPointerException();
+//        }
+//
+//    }
 }

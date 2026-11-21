@@ -3,16 +3,14 @@ package mbank.account;
 import java.text.MessageFormat;
 
 public class Account {
-    private int id;
-    private int userId;
-
+    private final int id;
+    private final int userId;
+    private int moneyAmount;
     public Account(int id, int userId, int moneyAmount) {
         this.id = id;
         this.userId = userId;
         this.moneyAmount = moneyAmount;
     }
-
-    int moneyAmount;
 
     public int getUserId() {
         return userId;
@@ -26,7 +24,7 @@ public class Account {
         return moneyAmount;
     }
 
-    public void setMoneyAmount(int moneyAmount) {
+    void setMoneyAmount(int moneyAmount) {
         this.moneyAmount = moneyAmount;
     }
 

@@ -33,7 +33,7 @@ public class AccountDepositCommand implements OperationCommand {
         } catch (ValidationException exception) {
             System.out.println(exception.getMessage());
         }catch (NumberFormatException exception) {
-            System.out.println("неверный формат id аккаунта");
+            System.out.println("Error: неверный формат ввода(ожидается int)");
         }
     }
 

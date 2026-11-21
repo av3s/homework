@@ -19,21 +19,14 @@ public class AccountProperties {
 
     public AccountProperties(@Value("${account.default-amount}") int defaultAmount,
                              @Value("${account.transfer-commission}") double transferCommission) {
-        String errorMessage = "";
-        boolean isIncorrectParameters = false;
+
         if (defaultAmount < 0) {
-            errorMessage = "\nПараметр default-amount должен быть >= 0";
-            isIncorrectParameters = !isIncorrectParameters;
+            throw new IllegalArgumentException("\nПараметр default-amount должен быть >= 0");
         }
-        if (transferCommission < 0) {
-            errorMessage = errorMessage + "\nПараметр transfer-commission должен быть >= 0";
-            if (!isIncorrectParameters) {
-                isIncorrectParameters = !isIncorrectParameters;
-            }
+        if ((transferCommission < 0) || (transferCommission >= 1)) {
+            throw new IllegalArgumentException("\nПараметр transfer-commission должен принимать значения в полуинтервале [0; 1)");
         }
-        if (isIncorrectParameters) {
-            throw new IllegalArgumentException(errorMessage);
-        }
+
         this.defaultAmount = defaultAmount;
         this.transferCommission = transferCommission;
     }

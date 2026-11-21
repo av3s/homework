@@ -25,9 +25,9 @@ public class AccountCloseCommand implements OperationCommand {
             accountService.closeAccount(account);
             System.out.println("\tАккаунт id=" + account.getId() + " удалён");
         } catch (ValidationException exception) {
-            System.out.printf(exception.getMessage());
+            System.out.println(exception.getMessage());
         } catch (NumberFormatException exception) {
-            System.out.println("Неверный формат id аккаунта");
+            System.out.println("\tНеверный формат id аккаунта");
         }
     }
 

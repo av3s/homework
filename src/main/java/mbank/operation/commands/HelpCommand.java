@@ -4,14 +4,17 @@ import mbank.operation.ConsoleOperationType;
 import mbank.operation.OperationCommand;
 import org.springframework.stereotype.Component;
 
+import java.util.Arrays;
+import java.util.stream.Collectors;
+
 @Component
 public class HelpCommand implements OperationCommand {
     @Override
     public void execute() {
-        System.out.println(ConsoleOperationType.values().toString());
-        System.out.println("""
-                                Available commands:
-                                USER_CREATE, SHOW_ALL_USERS, ACCOUNT_CREATE, ACCOUNT_DEPOSIT, ACCOUNT_WITHDRAW, ACCOUNT_TRANSFER, ACCOUNT_CLOSE, HELP, EXIT""");
+        String commands  = Arrays.stream(ConsoleOperationType.values())
+                .map(Enum::name)
+                .collect(Collectors.joining(", "));
+        System.out.println("Available commands:" + commands);
     }
 
     @Override

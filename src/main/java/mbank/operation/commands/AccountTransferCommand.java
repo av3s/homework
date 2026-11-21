@@ -28,16 +28,15 @@ public class AccountTransferCommand implements OperationCommand {
                 return;
             }
         } catch (NumberFormatException exception) {
-
             System.out.println("Неверный формат ID аккаунта");
+            return;
         }
         try {
             int transferAmount = consoleInput.readInt("\tВведите сумму перевода > ");
             Account sender = accountService.getAccount(accountSenderId);
             Account receiver = accountService.getAccount(accountReceiverId);
-            accountService.transfer(sender, receiver, transferAmount);
-        } catch (
-                ValidationException exception) {
+            System.out.println(accountService.transfer(sender, receiver, transferAmount));
+        } catch (ValidationException exception) {
             System.out.println(exception.getMessage());
         } catch (NumberFormatException exception) {
             System.out.println("Неверный формат суммы перевода");
