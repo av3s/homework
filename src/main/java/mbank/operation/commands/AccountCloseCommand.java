@@ -1,14 +1,34 @@
 package mbank.operation.commands;
 
+import exceptions.ValidationException;
+import mbank.account.Account;
+import mbank.account.AccountService;
+import mbank.console.ConsoleInput;
 import mbank.operation.ConsoleOperationType;
 import mbank.operation.OperationCommand;
+import mbank.user.User;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 @Component
 public class AccountCloseCommand implements OperationCommand {
+    @Autowired
+    ConsoleInput consoleInput;
+    @Autowired
+    AccountService accountService;
+
     @Override
     public void execute() {
-        System.out.println("AccountCloseCommand");
+        try {
+            int accountId = consoleInput.readInt("\tВведите id удаляемого аккаунта > ");
+            Account account = accountService.getAccount(accountId);
+            accountService.closeAccount(account);
+            System.out.println("\tАккаунт id=" + account.getId() + " удалён");
+        } catch (ValidationException exception) {
+            System.out.printf(exception.getMessage());
+        } catch (NumberFormatException exception) {
+            System.out.println("Неверный формат id аккаунта");
+        }
     }
 
     @Override

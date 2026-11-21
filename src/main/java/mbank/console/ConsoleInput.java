@@ -21,11 +21,7 @@ public class ConsoleInput {
         }
     }
 
-    public double readDouble(String prompt){
-        return Double.parseDouble(readString(prompt));
-    }
-
-    public int readInt(String prompt){
+    public int readInt(String prompt) {
         return Integer.parseInt(readString(prompt));
     }
 }

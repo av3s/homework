@@ -21,21 +21,20 @@ public class AccountDepositCommand implements OperationCommand {
     public void execute() {
         try {
             int accountId = consoleInput.readInt("\tВведите Id аккаунта > ");
-            double deposit = consoleInput.readDouble("\tВведите сумму пополнения > ");
+            int deposit = consoleInput.readInt("\tВведите сумму пополнения > ");
             Account account = accountService.getAccount(accountId);
 
             accountService.accountDeposit(account, deposit);
             System.out.println(MessageFormat.format("Зачислено {0} на счёт {1}. Новый баланс: {2} ",
                     deposit,
                     account.getId(),
-                    account.getMoneyAmmount())
+                    account.getMoneyAmount())
             );
         } catch (ValidationException exception) {
             System.out.println(exception.getMessage());
         }catch (NumberFormatException exception) {
             System.out.println("неверный формат id аккаунта");
         }
-
     }
 
     @Override

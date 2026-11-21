@@ -20,25 +20,22 @@ public class AccountWithdrawCommand implements OperationCommand {
 
     @Override
     public void execute() {
-        System.out.println("AccountWithDrowCommand");
-
         try {
             int accountId = consoleInput.readInt("\tВведите Id аккаунта > ");
             Account account = accountService.getAccount(accountId);
-            double withdrawAmount = consoleInput.readDouble("\tВведите сумму списания > ");
+            int withdrawAmount = consoleInput.readInt("\tВведите сумму списания > ");
             accountService.accountWithdraw(account, withdrawAmount);
-
             System.out.println(MessageFormat.format("Снято {0} со счёта {1}. Новый баланс: {2} ",
                     withdrawAmount,
                     account.getId(),
-                    account.getMoneyAmmount())
+                    account.getMoneyAmount())
             );
         } catch (
                 ValidationException exception) {
             System.out.println(exception.getMessage());
         } catch (
                 NumberFormatException exception) {
-            System.out.println("неверный формат id аккаунта");
+            System.out.println("Неверный формат id аккаунта");
         }
     }
 

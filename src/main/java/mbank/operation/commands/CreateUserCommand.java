@@ -27,8 +27,6 @@ public class CreateUserCommand implements OperationCommand {
                 ValidationException exception) {
             System.out.println(exception.getMessage());
         }
-
-
     }
 
     @Override

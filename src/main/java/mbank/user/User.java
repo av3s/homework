@@ -1,10 +1,12 @@
 package mbank.user;
 
+import exceptions.ValidationException;
 import mbank.account.Account;
 
 import java.text.MessageFormat;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.NoSuchElementException;
 import java.util.stream.Collectors;
 
 public class User {
@@ -19,7 +21,6 @@ public class User {
     }
 
 
-
     public int getId() {
         return id;
     }
@@ -28,33 +29,47 @@ public class User {
         return login;
     }
 
-    public void setLogin(String login) {
-        this.login = login;
+    public List<Account> getAccountList() {
+        return new ArrayList<>(accountList);
     }
 
-    public List<Account> getAccountList() {
-       return new ArrayList<>(accountList);
+    public Account getFirstAccount() {
+        try {
+            return accountList.getFirst();
+        } catch (NoSuchElementException exception) {
+            throw new ValidationException("У пользователя id=" + getId() + "нет ни одного аккаунта!!!");
+        }
     }
-    public boolean isFirstAccount(){
+
+    public boolean isFirstAccount() {
         return accountList.isEmpty();
     }
 
-public void addAccount(Account account) {
-        if (account==null){
+    public void removeAccountFromList(Account account) {
+        if (getFirstAccount().getId() != account.getId()) {
+            accountList.remove(account);
+        } else {
+            throw new ValidationException("Не возможно удалить первый аккаунт аккаунт!");
+        }
+    }
+
+    public void addAccount(Account account) {
+        if (account == null) {
             throw new NullPointerException();
         }
         accountList.add(account);
-  }
-  @Override
-    public String toString(){
-      String accounts = accountList.stream()
-              .map(String::valueOf)
-              .collect(Collectors.joining(", "));
+    }
 
-      return MessageFormat.format("User'{'id={0}, login=''{1}'', accounts=[{2}]'}'",
-              id,
-              login.replace("'", "\'"), //спасаем О'Нилов и прочих Д'Артоньянов
-              accounts);
-  }
+    @Override
+    public String toString() {
+        String accounts = accountList.stream()
+                .map(String::valueOf)
+                .collect(Collectors.joining(", "));
+
+        return MessageFormat.format("User'{'id={0}, login=''{1}'', accounts=[{2}]'}'",
+                id,
+                login.replace("'", "\'"), //спасаем О'Нилов и прочих Д'Артоньянов
+                accounts);
+    }
 }
 

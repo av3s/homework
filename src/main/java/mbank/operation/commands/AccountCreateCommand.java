@@ -15,6 +15,7 @@ public class AccountCreateCommand implements OperationCommand {
     ConsoleInput consoleInput;
     @Autowired
     AccountService accountService;
+
     @Override
     public void execute() {
         try {
@@ -23,10 +24,9 @@ public class AccountCreateCommand implements OperationCommand {
             System.out.println("\t" + account.toString());
         } catch (ValidationException exception) {
             System.out.println(exception.getMessage());
-        } catch (NumberFormatException exception){
-            System.out.println("Неверный формат ID пользователя");
+        } catch (NumberFormatException exception) {
+            System.out.println("\tНеверный формат ID пользователя");
         }
-
     }
 
     @Override

@@ -3,38 +3,35 @@ package mbank.account;
 import java.text.MessageFormat;
 
 public class Account {
-    int id;
-    int userId;
+    private int id;
+    private int userId;
 
-    public Account(int id, int userId, double moneyAmmount) {
+    public Account(int id, int userId, int moneyAmount) {
         this.id = id;
         this.userId = userId;
-        this.moneyAmmount = moneyAmmount;
+        this.moneyAmount = moneyAmount;
     }
 
-    double moneyAmmount;
+    int moneyAmount;
 
     public int getUserId() {
         return userId;
     }
 
-
-
     public int getId() {
         return id;
     }
 
-
-
-    public double getMoneyAmmount() {
-        return moneyAmmount;
+    public int getMoneyAmount() {
+        return moneyAmount;
     }
 
-    public void setMoneyAmmount(double moneyAmmount) {
-        this.moneyAmmount = moneyAmmount;
+    public void setMoneyAmount(int moneyAmount) {
+        this.moneyAmount = moneyAmount;
     }
+
     @Override
-    public String toString(){
-        return MessageFormat.format("Account'{'id={0}, userId={1}, moneyAmount={2}'}'", id, userId, moneyAmmount );
+    public String toString() {
+        return MessageFormat.format("Account'{'id={0}, userId={1}, moneyAmount={2}'}'", id, userId, moneyAmount);
     }
 }

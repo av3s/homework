@@ -35,8 +35,6 @@ public class ConsoleListener {
     public void run() {
         boolean isRunning = true;
         System.out.println("MiniBank running!");
-
-
         commandMap.get(ConsoleOperationType.HELP).execute();
         do {
             String currentLine;
@@ -50,7 +48,6 @@ public class ConsoleListener {
                 isRunning = false;
                 continue;
             }
-
             Optional<ConsoleOperationType> commandOpt = parse(currentLine);
             if (commandOpt.isEmpty()) {
                 System.out.println("Error: Wrong command: " + currentLine);
@@ -60,10 +57,7 @@ public class ConsoleListener {
             if (command == ConsoleOperationType.EXIT) {
                 isRunning = false;
             }
-
         } while (isRunning);
-
-
     }
 
     private Optional<ConsoleOperationType> parse(String line) {
