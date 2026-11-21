@@ -59,10 +59,6 @@ public class UserService {
                 .orElseThrow(() -> new ValidationException("Пользователь id=" + userId + " не найден. "));
     }
 
-  //  public boolean isFirstAccount(int userId) {
-  //      return userRepositoryInMemory.get(userId).getAccountList().isEmpty();
-  //  }
-
 
     public List<User> getUserList() {
         return userRepositoryInMemory.values().stream().toList();
@@ -71,13 +67,4 @@ public class UserService {
     public void addAccountByUserId(int userId, Account account) {
         userRepositoryInMemory.get(userId).addAccount(account);
     }
-
-//    public void addAccount(int userId, Account account) {
-//        if (account != null) {
-//            userRepositoryInMemory.get(userId).addAccount(account);
-//        } else {
-//            throw new NullPointerException();
-//        }
-//
-//    }
 }

@@ -41,7 +41,7 @@ public class ConsoleListener {
                 String currentLine;
                 do {
                     currentLine = consoleInput.readString("Enter command > ");
-                } while (currentLine.isEmpty());
+                } while (currentLine.isBlank());
 
                 Optional<ConsoleOperationType> commandOpt = parse(currentLine);
                 if (commandOpt.isEmpty()) {

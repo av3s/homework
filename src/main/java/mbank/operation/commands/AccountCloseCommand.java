@@ -13,9 +13,9 @@ import org.springframework.stereotype.Component;
 @Component
 public class AccountCloseCommand implements OperationCommand {
     @Autowired
-    ConsoleInput consoleInput;
+    private ConsoleInput consoleInput;
     @Autowired
-    AccountService accountService;
+    private AccountService accountService;
 
     @Override
     public void execute() {

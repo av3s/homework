@@ -36,16 +36,12 @@ public class User {
         }
     }
 
-    public boolean isFirstAccount() {
+    public boolean hasNoAccount() {
         return accountList.isEmpty();
     }
 
     public void removeAccountFromList(Account account) {
-        if (getFirstAccount().getId() != account.getId()) {
-            accountList.remove(account);
-        } else {
-            throw new ValidationException("Не возможно удалить первый аккаунт аккаунт!");
-        }
+        accountList.remove(account);
     }
 
     public void addAccount(Account account) {

@@ -1,7 +1,6 @@
 package mbank.console;
 
 import exceptions.UnexpectedEndOfInputException;
-import exceptions.ValidationException;
 import org.springframework.stereotype.Component;
 
 import java.util.Scanner;

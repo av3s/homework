@@ -1,8 +1,6 @@
 package mbank.operation.commands;
 
 import exceptions.ValidationException;
-import mbank.account.Account;
-import mbank.account.AccountService;
 import mbank.console.ConsoleInput;
 import mbank.operation.ConsoleOperationType;
 import mbank.operation.OperationCommand;
@@ -19,8 +17,8 @@ public class CreateUserCommand implements OperationCommand {
     private UserService userService;
     @Override
     public void execute() {
-        String login = consoleInput.readString("Введите логин нового пользователя > ");
         try {
+            String login = consoleInput.readString("Введите логин нового пользователя > ");
             User user = userService.createUser(login);
             System.out.println("\tСоздан пользователь " + user);
         } catch (

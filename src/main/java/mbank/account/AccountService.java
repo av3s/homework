@@ -3,7 +3,6 @@ package mbank.account;
 import exceptions.ValidationException;
 import mbank.user.User;
 import mbank.user.UserService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import java.text.MessageFormat;
 import java.util.HashMap;
@@ -16,7 +15,7 @@ public class AccountService {
     private final UserService userService;
     private final AccountProperties accountProperties;
     private final Map<Integer, Account> accountMap;
-    int idCounter;
+    private int idCounter;
 
     public AccountService(UserService userService, AccountProperties accountProperties) {
         this.userService = userService;
@@ -70,11 +69,11 @@ public class AccountService {
                 commissionMessage);
     }
 
-    public Account createAccount(int userId) throws ValidationException {
+    public Account createAccount(int userId){
         User user = userService.getUser(userId);
         int amount = 0;
 
-        if (user.isFirstAccount()) {
+        if (user.hasNoAccount()) {
             amount = accountProperties.getDefaultAmount();
         }
         idCounter++;
@@ -84,14 +83,14 @@ public class AccountService {
         return account;
     }
 
-    public void closeAccount(Account account) throws ValidationException {
+    public void closeAccount(Account account){
         User user = userService.getUser(account.getUserId());
         Account primaryAccount = user.getFirstAccount();
         if (primaryAccount.getId() == account.getId()){
             throw new ValidationException("Нельзя удалить основной аккаунт пользователя");
         }
         if(account.getMoneyAmount() > 0) {
-            transfer(account, user.getFirstAccount(), account.getMoneyAmount());
+            transfer(account, primaryAccount, account.getMoneyAmount());
         }
         user.removeAccountFromList(account);
         accountMap.remove(account.getId());
