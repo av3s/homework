@@ -6,7 +6,6 @@ import mbank.account.AccountService;
 import mbank.console.ConsoleInput;
 import mbank.operation.ConsoleOperationType;
 import mbank.operation.OperationCommand;
-import mbank.user.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 

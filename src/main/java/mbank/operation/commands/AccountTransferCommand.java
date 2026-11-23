@@ -23,10 +23,10 @@ public class AccountTransferCommand implements OperationCommand {
         try {
             accountSenderId = consoleInput.readInt("\tВведите Id аккаунта отправителя > ");
             accountReceiverId = consoleInput.readInt("\tВведите Id аккаунта получателя > ");
-            if (accountReceiverId == accountSenderId) {
-                System.out.println("\tАккаунт получателя и акаунт отправителя один и тот же аккаунт.");
-                return;
-            }
+//            if (accountReceiverId == accountSenderId) {
+//                System.out.println("\tАккаунт получателя и аккаунт отправителя один и тот же аккаунт.");
+//                return;
+//            }
         } catch (NumberFormatException exception) {
             System.out.println("Неверный формат ID аккаунта");
             return;
