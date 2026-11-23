@@ -1,0 +1,33 @@
+name: Link spring-core history to main
+
+on:
+  workflow_dispatch:
+
+jobs:
+  link:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write   # нужно для git push
+    steps:
+      - name: Checkout spring-core
+        uses: actions/checkout@v4
+        with:
+          ref: spring-core
+          fetch-depth: 0   # вся история, иначе merge-base не найдётся
+
+      - name: Configure Git
+        run: |
+          git config user.name "GitHub Actions"
+          git config user.email "actions@github.com"
+
+      - name: Merge main into spring-core (allow unrelated histories)
+        run: |
+          git fetch origin main
+          git merge origin/main \
+            --allow-unrelated-histories \
+            --no-edit \
+            -X ours \
+            -m "chore: link history with main (unrelated histories merge)"
+
+      - name: Push spring-core
+        run: git push origin spring-core
